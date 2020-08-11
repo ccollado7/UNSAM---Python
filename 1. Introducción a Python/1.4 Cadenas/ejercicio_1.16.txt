@@ -1,0 +1,5 @@
+# ejercicio 1.16
+
+¿Por que la verificacion de 'nana' dio True?
+
+Por que en la cadena 'Melón,Manzana,Naranja,Mandarina,Banana,Kiwi,Pera' tengo 'nana' en 'Banana' y por lo tanto devuelve True

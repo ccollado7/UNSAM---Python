@@ -1,0 +1,2 @@
+bool('False') devuelve como resultado True ya que la cadena 'False' no es una cadena vacia y no el contenido 'False' que se podria interpretear erroneamente como un booleano.
+En cambio si realizamos bool('') devolvera False ya que la cadena es vacia (longitud 0)
