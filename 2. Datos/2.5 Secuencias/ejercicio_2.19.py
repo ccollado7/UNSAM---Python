@@ -1,51 +1,54 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Aug 15 11:09:58 2020
+Created on Sun Aug 16 20:23:53 2020
 
 @author: Claudio Collado
 
 """
 
+#Importo el modulo que necesito
 import csv
 
-#Funcion N°1
-
+#Defino la Funcion N°1
 def leer_camion(nombre_archivo):
     ''' Funcion que lee un archivo de cajones en un camion 
         y devuelve una lista de diccionarios donde cada uno 
         de estos corresponde a una fruta '''
     camion = []
     with open(nombre_archivo, 'rt') as f:
-        rows = csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            lote = {'nombre':row[0],'cajones':int(row[1]),'precio':float(row[2])}
+        filas = csv.reader(f)
+        encabezados = next(filas)
+        for fila in filas:
+            lote = dict(zip(encabezados,fila))
             camion.append(lote)
     return camion                    
 
 
-#Funcion N°2
-
+# Defino la Funcion N°2
 def leer_precios(nombre_archivo):
     ''' Funcion que lee un archivo de precios y devuelve 
         un diccionario de los mismos'''
     diccionario_precios = {}
     f = open(nombre_archivo,'r')
-    rows = csv.reader(f)
-    for row in rows:
+    filas = csv.reader(f)
+    for fila in filas:
         try:
-            diccionario_precios[row[0]] = float(row[1])
+            diccionario_precios[fila[0]] = float(fila[1])
         except:
             pass
             #print('Fila Vacia')
     return diccionario_precios
 
+#Defino la Funcion N°3
 def balance(archivo_camion,archivo_precios):
+    '''Funcion que calculo el costo del camion,
+    el valor de las ventas y el balance'''
+    
     #Calculo del costo del camion y del costo de venta
     costo_camion = []
     ventas = []
-    camion = leer_camion(archivo_camion)
-    precios = leer_precios(archivo_precios)
+    camion = leer_camion(archivo_camion) #LLamo a la Funcion N°1
+    precios = leer_precios(archivo_precios) #Llamo a la Funcion N°2
     for i in camion:
         costo = int(i['cajones']) * float(i['precio'])
         costo_camion.append(costo)

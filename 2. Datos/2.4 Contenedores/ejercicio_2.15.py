@@ -40,6 +40,7 @@ def leer_precios(nombre_archivo):
             #print('Fila Vacia')
     return diccionario_precios
 
+#Funcion N°3
 def balance(archivo_camion,archivo_precios):
     #Calculo del costo del camion y del costo de venta
     costo_camion = []
