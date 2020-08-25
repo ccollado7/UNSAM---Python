@@ -18,6 +18,14 @@ def buscar_u_elemento(lista,e):
             pos = i
     return pos
 
+#Se probaron los siguientes casos:
+    #buscar_u_elemento([1,2,3,2,3,4],1) - Resultado 0
+    #buscar_u_elemento([1,2,3,2,3,4],2) - Resultado 3
+    #buscar_u_elemento([1,2,3,2,3,4],3) - Resultado 4
+    #buscar_u_elemento([1,2,3,2,3,4],5) - Resultado -1
+
+
+
 def buscar_n_elemento(lista,e):
     '''Cuenta la cantidad de veces que e
     aparece en la lista'''   
@@ -28,8 +36,10 @@ def buscar_n_elemento(lista,e):
     return contador
 
 #Se probaron los siguientes casos:
-    #buscar_u_elemento([1,2,3,2,3,4],1) - Resultado 0
-    #buscar_u_elemento([1,2,3,2,3,4],2) - Resultado 3
-    #buscar_u_elemento([1,2,3,2,3,4],3) - Resultado 4
-    #buscar_u_elemento([1,2,3,2,3,4],5) - Resultado -1
+    #buscar_n_elemento([1,2,3,2,3,4],1) - Resultado 1
+    #buscar_n_elemento([1,2,3,2,3,4],2) - Resultado 2
+    #buscar_n_elemento([1,2,3,2,3,4],3) - Resultado 2
+    #buscar_n_elemento([1,2,3,2,3,4],5) - Resultado 0
+    
+    
 
