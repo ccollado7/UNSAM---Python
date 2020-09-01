@@ -1,10 +1,66 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Aug 23 11:28:39 2020
+Created on Tue Sep  1 14:15:04 2020
 
 @author: Claudio Collado
 
 """
+#%%
+#Ejercicio 4.30
+
+import csv
+import matplotlib.pyplot as plt
+
+def leer_arboles(nombre_archivo):
+    arboleda = []
+    f = open(nombre_archivo,'r',encoding = 'utf8')
+    filas = csv.reader(f)
+    encabezado = next(filas)
+    for fila in filas:
+        diccionario_arbol = dict(zip(encabezado,fila))
+        arboleda.append(diccionario_arbol)
+    return arboleda
+    
+arboleda = leer_arboles('arbolado-en-espacios-verdes.csv')
+
+altos = [float(arbol['altura_tot']) for arbol in arboleda if arbol['nombre_com'] == 'Jacarandá']
+print(len(altos))
+plt.hist(altos,bins='auto')
+
+
+#%%
+#Ejercicio 4.31
+
+import csv
+import numpy as np
+import matplotlib.pyplot as plt
+
+def leer_arboles(nombre_archivo):
+    arboleda = []
+    f = open(nombre_archivo,'r',encoding = 'utf8')
+    filas = csv.reader(f)
+    encabezado = next(filas)
+    for fila in filas:
+        diccionario_arbol = dict(zip(encabezado,fila))
+        arboleda.append(diccionario_arbol)
+    return arboleda
+    
+arboleda = leer_arboles('arbolado-en-espacios-verdes.csv')
+
+H = [(float(arbol['altura_tot']),float(arbol['diametro'])) for arbol in arboleda if arbol['nombre_com'] == 'Jacarandá']
+
+vector = np.array(H)
+
+altura = vector[:,0]
+diametro = vector[:,1]
+
+
+plt.scatter(diametro,altura,alpha=0.2)
+plt.xlabel('diametro (cm)')
+plt.ylabel('alto (m)')
+plt.title('Relacion diametro-alto para Jacarandás')
+
+
 #%%
 #Ejercicio 4.32
 
@@ -36,7 +92,7 @@ def medidas_de_especies(especies,arboleda):
 diccionario = medidas_de_especies(especies,arboleda)
 
 #%%
-#Eucalipto
+#Ejercicio 4.32 - Eucalipto
 
 especie = 'Eucalipto'
 datos = diccionario[especie]
@@ -50,7 +106,7 @@ plt.ylabel('Alto (m)')
 plt.legend()
          
 #%%
-#Palo borracho rosado
+#Ejercicio 4.32 - Palo borracho rosado
 
 especie = 'Palo borracho rosado'
 datos = diccionario[especie]
@@ -65,7 +121,7 @@ plt.legend()
          
 
 #%%
-#Palo borracho rosado
+#Ejercicio 4.32 - Jacarandá
 
 especie = 'Jacarandá'
 datos = diccionario[especie]
@@ -79,7 +135,7 @@ plt.ylabel('Alto (m)')
 plt.legend()
 
 #%%
-#Extra 2 especies - Eucalipto y Palo borracho rosado
+#Ejercicio 4.32 - Extra 2 especies - Eucalipto y Palo borracho rosado
 
 #Eucalipto
 
@@ -105,7 +161,7 @@ plt.ylabel('Alto (m)')
 plt.legend()
 
 #%%
-#Extra 2 especies - Eucalipto y Jacarandá
+#Ejercicio 4.32 - Extra 2 especies - Eucalipto y Jacarandá
 
 #Eucalipto
 
@@ -131,7 +187,7 @@ plt.ylabel('Alto (m)')
 plt.legend()
 
 #%%
-#Extra 2 especies - Jacarandá y Palo borracho rosado
+#Ejercicio 4.32 - Extra 2 especies - Jacarandá y Palo borracho rosado
 
 especie_1 = 'Jacarandá'
 datos_1 = diccionario[especie_1]
@@ -155,7 +211,7 @@ plt.ylabel('Alto (m)')
 plt.legend()
 
 #%%
-#Extra - 3 especies
+#Ejercicio 4.32 - Extra - 3 especies
 
 #Eucalipto
 
@@ -188,11 +244,4 @@ plt.title('Relacion diametro-altura para las 3 especies')
 plt.xlabel('Diametro (cm)')
 plt.ylabel('Alto (m)')         
 plt.legend()
-
-
-
-
-
-
-
 
