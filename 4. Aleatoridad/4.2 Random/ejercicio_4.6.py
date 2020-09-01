@@ -11,7 +11,6 @@ def tirar():
     tirada = []
     for i in range(5):
         tirada.append(random.randint(1,6))
-
     return tirada
 
 def es_generala(tirada):
