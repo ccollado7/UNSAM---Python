@@ -8,35 +8,30 @@ Created on Fri Sep  4 21:53:20 2020
 
 #Ejercicio 5.11
 
-def busqueda_binaria(lista, x, verbose = False):
-    '''Búsqueda binaria
-    Precondición: la lista está ordenada
-    Devuelve -1 si x no está en lista;
-    Devuelve p tal que lista[p] == x, si x está en lista
-    '''
-    if verbose:
-        print(f'[DEBUG] izq |der |medio')
+def donde_insertar(lista, x):
+    '''Funcion que recibe una lista ordenada y un elemento x.
+    Si el elemento x se encuentra en la lista devulve el indice de x.
+    Si el elemento x no se encuentra en la lista busca el indice donde
+    se deberia insertar para no alterar el orden de la lista'''
+    
+    #Realizo la busqueda binaria
     pos = -1 # Inicializo respuesta, el valor no fue encontrado
     izq = 0
     der = len(lista) - 1
     while izq <= der:
         medio = (izq + der) // 2
-        if verbose:
-            print(f'[DEBUG] {izq:3d} |{der:>3d} |{medio:3d}')
         if lista[medio] == x:
             pos = medio     # elemento encontrado!
         if lista[medio] > x:
             der = medio - 1 # descarto mitad derecha
         else:               # if lista[medio] < x:
             izq = medio + 1 # descarto mitad izquierda
-    return pos
-
-def donde_insertar(lista, x):
-    pos = busqueda_binaria(lista,x)
+    
+    #Evaluo si el elemento x fue encontrado por medio de busqueda binaria
     if pos != -1:
         return pos
-    else:
-        for i in lista:
+    else: #Si no lo encuentro busco el indice donde se podria insertar
+        for i in lista: #Recorro cada elemento de la lista (peor caso es busqueda lineal O(n))
             if (x > i) and (lista.index(i)<len(lista)-1):
                 pass
             else:
@@ -45,7 +40,10 @@ def donde_insertar(lista, x):
                 else:
                     return lista.index(i)
 
-insertar = donde_insertar([0,2,4,6], 7)
-print(insertar)
-            
-        
+#Casos Probados:
+    #donde_insertar([0,2,4,6], 7) - Resultado 4
+    #donde_insertar([0,2,4,6], 2) - Resultado 1
+    #donde_insertar([0,2,4,6], 3) - Resultado 2
+    #donde_insertar([0,2,4,6], 5) - Resultado 3
+    #donde_insertar([0,2,4,6], 6) - Resultado 3          
+    #donde_insertar([0,2,4,6], 100) - Resultado 4

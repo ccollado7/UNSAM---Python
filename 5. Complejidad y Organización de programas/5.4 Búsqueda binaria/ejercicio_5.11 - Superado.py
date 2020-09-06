@@ -6,9 +6,9 @@ Created on Fri Sep  4 21:53:20 2020
 
 """
 
-#Ejercicio 5.11 - Mejorado
+#Ejercicio 5.11
 
-def donde_insertar(lista, x,verbose=False):
+def busqueda_binaria(lista, x, verbose = False):
     '''Búsqueda binaria
     Precondición: la lista está ordenada
     Devuelve -1 si x no está en lista;
@@ -29,6 +29,10 @@ def donde_insertar(lista, x,verbose=False):
             der = medio - 1 # descarto mitad derecha
         else:               # if lista[medio] < x:
             izq = medio + 1 # descarto mitad izquierda
+    return pos
+
+def donde_insertar(lista, x):
+    pos = busqueda_binaria(lista,x)
     if pos != -1:
         return pos
     else:
@@ -41,11 +45,7 @@ def donde_insertar(lista, x,verbose=False):
                 else:
                     return lista.index(i)
 
-#Casos Probados:
-    #donde_insertar([0,2,4,6], 7) - Resultado 4
-    #donde_insertar([0,2,4,6], 2) - Resultado 1
-    #donde_insertar([0,2,4,6], 3) - Resultado 2
-    #donde_insertar([0,2,4,6], 5) - Resultado 3
-    #donde_insertar([0,2,4,6], 6) - Resultado 3          
-    #donde_insertar([0,2,4,6], 100) - Resultado 4
+insertar = donde_insertar([0,2,4,6], 7)
+print(insertar)
+            
         
