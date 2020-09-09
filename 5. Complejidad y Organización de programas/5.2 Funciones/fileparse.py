@@ -5,71 +5,6 @@ Created on Fri Sep  4 09:43:38 2020
 @author: Claudio Collado
 
 """
-#%%
-#Ejercicio 5.3
-
-import csv
-
-def parse_csv(nombre_archivo):
-    '''
-    Parsea un archivo CSV en una lista de registros
-    '''
-    with open(nombre_archivo) as f:
-        rows = csv.reader(f)
-
-        # Lee los encabezados
-        headers = next(rows)
-        records = []
-        for row in rows:
-            if not row:    # Saltea filas sin datos
-                continue
-            record = dict(zip(headers, row))
-            records.append(record)
-
-    return records
-
-camion = parse_csv('camion.csv')
-print(camion)
-
-#%%
-#Ejercicio 5.4
-
-def parse_csv(nombre_archivo, select=None):
-    '''
-    Parsea un archivo CSV en una lista de registros
-    '''
-    with open(nombre_archivo) as f:
-        filas = csv.reader(f)
-
-        # Lee los encabezados del archivo
-        encabezados = next(filas)
-
-        # Si se indicó un selector de columnas,
-        #    buscar los índices de las columnas especificadas.
-        # Y achicar el conjunto de encabezados para diccionarios
-
-        if select:
-            indices = [encabezados.index(ncolumna) for ncolumna in select]
-            encabezados = select
-        else:
-            indices = []
-
-        registros = []
-        for fila in filas:
-            if not fila:    # Saltear filas vacías
-                continue
-            # Filtrar la fila si se especificaron columnas
-            if indices:
-                fila = [fila[index] for index in indices]
-
-            # Armar el diccionario
-            registro = dict(zip(encabezados, fila))
-            registros.append(registro)
-
-    return registros
-
-camion = parse_csv('camion.csv',select=['nombre', 'cajones'])
-print(camion)
 
 #%%
 #Ejercicio 5.5 - Sin select
@@ -104,7 +39,8 @@ def parse_csv(nombre_archivo, types=[str, int, float]):
 
     return registros
 
-print(parse_csv('camion.csv'))
+camion = parse_csv('camion.csv')
+print(camion)
 
 #%%
 #Ejercicio 5.5 - Con Select
@@ -150,7 +86,6 @@ camion = parse_csv('camion.csv',select=['nombre', 'cajones'],types=[str, int])
 print(camion)
 
 #%%
-
 #Ejercicio 5.6
 
 import csv
