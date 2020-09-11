@@ -1,25 +1,37 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep  4 15:10:04 2020
+Created on Fri Sep  4 09:43:38 2020
 
 @author: Claudio Collado
 
 """
-#Ejercicio 5.6
+
+#Ejercicio 6.1
 
 import csv
 
-def parse_csv(nombre_archivo, select=False, types=[str,float], has_headers=True,silence_errors = False):
+def parse_csv(nombre_archivo, select=None, types=None, has_headers=True,silence_errors = False):
     '''
     Parsea un archivo CSV en una lista de registros
     '''
-    with open(nombre_archivo) as f:
+    with open(nombre_archivo,'r') as f:
         filas = csv.reader(f)
-        
+
         if select and not has_headers:
             raise RuntimeError("Para seleccionar, necesito encabezados.")
 
-        if has_headers and select:
+        if not has_headers:
+            registros = []
+            for fila in filas:
+                if not fila:    # Saltear filas vacías
+                    continue
+                #Conversion de tipo
+                if types:
+                    fila = [func(val) for func, val in zip(types, fila) ] 
+                # Armar el diccionario
+                registros.append((fila[0],fila[1]))
+
+        else:
             # Lee los encabezados del archivo
             encabezados = next(filas)
     
@@ -50,18 +62,15 @@ def parse_csv(nombre_archivo, select=False, types=[str,float], has_headers=True,
                     registros.append(registro)
                 except ValueError as e: #Si atrapo la excepcion ingreso aqui
                     if not silence_errors: #Evaluo si quiero sienciar o no los informes de errores
-                        print(f'Row {indice}: No pude convertir {fila}. Motivo {e}')
-        if has_headers == False:
-            registros = []
-            for fila in filas:
-                if not fila:    # Saltear filas vacías
-                    continue
-                #Conversion de tipo
-                if types:
-                    fila = [func(val) for func, val in zip(types, fila) ] 
-                # Armar el diccionario
-                registros.append((fila[0],fila[1]))
+                        print(f'Row {indice+1}: No pude convertir {fila}. Motivo {e}')
+
     return registros
 
-camion = parse_csv('missing.csv',select=['nombre', 'cajones'], types = [str, int, float],silence_errors = True)
-print(camion)
+camion_1 = parse_csv('missing.csv',select=['nombre', 'cajones'], types = [str, int, float]) #No silecio los errores
+print(camion_1)
+
+print('----------------------------------------')
+
+camion_2 = parse_csv('missing.csv',select=['nombre', 'cajones'], types = [str, int, float],silence_errors = True) #Silencio los errores
+print(camion_2)
+
