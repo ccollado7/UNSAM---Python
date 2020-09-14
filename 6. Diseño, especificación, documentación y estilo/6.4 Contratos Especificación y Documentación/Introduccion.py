@@ -87,5 +87,18 @@ def division(dividendo, divisor):
     '''
     return dividendo / divisor
 
+#%%
+#Invariantes de ciclo
+
+def maximo(lista):
+    'Devuelve el elemento máximo de la lista o None si está vacía.'
+    if not lista:
+        return None
+    max_elem = lista[0]
+    for elemento in lista:
+        if elemento > max_elem:
+            max_elem = elemento
+    return max_elem
+
 
 
