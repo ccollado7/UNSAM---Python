@@ -17,11 +17,17 @@ with open('missing.csv') as f:
     
 print(camion_1)
 
+
 #%%
-lines = ['name,cajones,precio', 'Lima,100,34.23', 'Naranja,50,91.1', 'Mburucuya,75,45.1']
-camion_2 = fileparse.parse_csv(lines, types=[str,int,float])
+with gzip.open('camion.csv.gz', 'rt') as file:
+    camion_2 = fileparse.parse_csv(file, types=[str,int,float])
 print(camion_2)
 
 #%%
-camion_3 = fileparse.parse_csv('camion.csv', types=[str,int,float])
+lines = ['name,cajones,precio', 'Lima,100,34.23', 'Naranja,50,91.1', 'Mburucuya,75,45.1']
+camion_3 = fileparse.parse_csv(lines, types=[str,int,float])
 print(camion_3)
+
+#%%
+camion_4 = fileparse.parse_csv('camion.csv', types=[str,int,float])
+print(camion_4)
