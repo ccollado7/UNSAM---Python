@@ -23,12 +23,6 @@ class Camion:
     def __contains__(self, nombre):
         return any([lote.nombre == nombre for lote in self._lotes])
 
-    ##Metodos especiales agregados por mi
-    
-    def 
-
-
-
     def precio_total(self):
         return sum([l.costo() for l in self._lotes])
 
